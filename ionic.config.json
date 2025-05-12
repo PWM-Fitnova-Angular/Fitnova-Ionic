@@ -1,0 +1,7 @@
+{
+  "name": "Fitnova",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
