@@ -1,35 +1,3 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Register</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-login>
 
-<ion-content>
-  <ion-card> <!-- Sirve para grupos de inputs -->
-    <ion-card-header>
-      <ion-card-title>Welcome to Fitnova</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item>
-        <ion-label position="floating" >Name & Surname</ion-label>
-        <ion-input [(ngModel)]="name" type="text" required="" placeholder="Add your full name" ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating" >Email</ion-label>
-        <ion-input [(ngModel)]="email" type="email" required="" placeholder="Add your full name" ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating" >Number</ion-label>
-        <ion-input [(ngModel)]="phoneNumber" type="text" required="" placeholder="Add your number" ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating" >Birthday</ion-label>
-        <ion-input [(ngModel)]="birthday" type="date" required=""  ></ion-input>
-      </ion-item>
-
-      <ion-button (click)="Registrarse()" >Registrarse</ion-button>
-    </ion-card-content>
-
-
-  </ion-card>
-</ion-content>
+</app-login>
