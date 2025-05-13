@@ -9,18 +9,41 @@
     <ion-card-header>
       <ion-card-title>Welcome to Fitnova</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
-      <ion-item>
-        <ion-label position="floating">Email</ion-label>
-        <ion-input [(ngModel)]="email" type="email" required="" ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating" >Password</ion-label>
-        <ion-input [(ngModel)]="password" type="email" required="" ></ion-input>
-      </ion-item>
-      <ion-button (click)="login()" type="password" > Log In</ion-button>
-      <ion-button [routerLink]="['/register']"  >Register</ion-button>
-    </ion-card-content>
+
+    <form #form="ngForm" (ngSubmit)="login()">
+      <div>
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Add your email"
+          required
+          [(ngModel)]="email"
+          #emailRef="ngModel"
+        />
+        <p class="error-msg" *ngIf="emailRef.invalid && emailRef.touched">Please enter a valid email.</p>
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Add your password"
+          required
+          minlength="6"
+          [(ngModel)]="password"
+          #passwordRef="ngModel"
+        />
+        <p class="error-msg" *ngIf="passwordRef.invalid && passwordRef.touched">
+          Password must be at least 6 characters.
+        </p>
+        <p class="error-msg">{{loginError}}</p>
+        <button class="login" type="submit" [disabled]="form.invalid">Login</button>
+
+        <a routerLink="/register" class="create_account">Create an account</a>
+      </div>
+    </form>
 
   </ion-card>
 </ion-content>

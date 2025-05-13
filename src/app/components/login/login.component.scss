@@ -1,42 +1,73 @@
-ion-content {
-  --background: #f4f5f8;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 ion-card {
   width: 90%;
   max-width: 400px;
+  margin: 40px auto;
   padding: 20px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-  background: #fff;
-}
-
-ion-card-header {
-  text-align: center;
+  border-radius: 12px;
 }
 
 ion-card-title {
-  font-size: 1.4rem;
-  font-weight: 600;
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+ion-card div {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+label {
+  font-weight: 500;
   color: #333;
 }
 
-ion-item {
-  --highlight-color-focused: #3880ff;
-  margin-bottom: 16px;
-  border-radius: 8px;
+input[type="email"],
+input[type="password"] {
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s;
 }
 
-ion-input {
-  --padding-start: 12px;
+input:focus {
+  border-color: #3880ff;
 }
 
-ion-button {
-  width: 100%;
-  margin-top: 10px;
-  --border-radius: 8px;
+button.login {
+  padding: 10px;
+  background-color: #3880ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button.login:hover {
+  background-color: #3171e0;
+}
+
+a.create_account {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 14px;
+  color: #3880ff;
+  text-decoration: none;
+}
+
+a.create_account:hover {
+  text-decoration: underline;
+}
+.error-msg {
+  font-size: 13px;
+  color: #e74c3c;
+  margin-top: -8px;
+  margin-bottom: 8px;
+  padding-left: 2px;
 }

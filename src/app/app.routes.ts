@@ -11,5 +11,9 @@ export const routes: Routes = [
     path: 'register',
     loadComponent: () => import('./components/register/register.component').then((m) => m.RegisterComponent),
   },
+  {
+    path: 'exercises',
+    loadComponent: () => import('./components/exercises/exercises.component').then((m) => m.ExercisesComponent),
+  },
   { path: '', redirectTo: 'login', pathMatch: 'full',},
 ];

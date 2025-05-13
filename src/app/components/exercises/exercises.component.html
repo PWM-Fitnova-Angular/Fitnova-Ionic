@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [ngClass]="bodyClass">
+  <!-- Filtros horizontales -->
+  <ion-segment scrollable>
+    <ion-segment-button
+      *ngFor="let item of mainItems; let i = index"
+      (click)="topFilter(item)"
+      [class.active]="topFilterActive === item.split(' ')[0]"
+      [attr.data-short]="item.split(' ')[0].substr(0, 1)">
+      <ion-label>{{ item }}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-grid>
+    <ion-row>
+
+
+      <!-- Grid principal -->
+      <ion-col size="12" sizeMd="9">
+        <ion-row class="ion-justify-content-start">
+          <ng-container *ngIf="cardItems.length > 0">
+            <ion-col size="12" sizeSm="6" sizeMd="4" *ngFor="let item of cardItems">
+              <app-exercise-card
+                [cardLabel]="item.type"
+                [cardTitle]="item.name"
+                [cardImage]="item.imageUrl"
+                [cardObject]="item">
+              </app-exercise-card>
+            </ion-col>
+          </ng-container>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

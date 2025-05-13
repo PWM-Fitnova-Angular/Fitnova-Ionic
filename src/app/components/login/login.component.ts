@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {IonicModule} from "@ionic/angular";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {
   IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle,
@@ -12,7 +11,9 @@ import {
   IonTitle,
   IonToolbar
 } from '@ionic/angular/standalone';
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
+import {NgIf} from "@angular/common";
+import {loginUser} from "../../firebase/firebase_auth_utils";
 
 @Component({
   standalone:true,
@@ -22,18 +23,28 @@ import {RouterLink} from "@angular/router";
   imports: [
     IonHeader, IonToolbar, IonTitle, IonContent,
     IonList, IonItem, IonLabel, IonInput, IonButton,
-    FormsModule, RouterLink, IonCardHeader, IonCard, IonCardTitle, IonCardContent,
+    FormsModule, RouterLink, IonCardHeader, IonCard, IonCardTitle, IonCardContent, NgIf,
 
   ]
 })
 export class LoginComponent  {
   email: string = '';
   password: string = '';
+  loginError: string = '';
 
-  constructor() { }
+  constructor(private router: Router) { }
 
 
-  login() {
+  async login() {
+
+
+    const response = await loginUser(this.email, this.password);
+
+    if(response){
+      await this.router.navigate(['/exercises']);
+    }else{
+      this.loginError = "Email or password incorrect";
+    }
 
   }
 }
