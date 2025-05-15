@@ -1,3 +1,106 @@
-<p>
-  register works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Join Fitnova</ion-card-title>
+    </ion-card-header>
+
+    <form #form="ngForm" (ngSubmit)="register()">
+      <div>
+        <label for="name">Full Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Enter your full name"
+          required
+          [(ngModel)]="name"
+          #nameRef="ngModel"
+        />
+        <p class="error-msg" *ngIf="nameRef.invalid && nameRef.touched">Please enter your name.</p>
+
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+          [(ngModel)]="email"
+          #emailRef="ngModel"
+        />
+        <p class="error-msg" *ngIf="emailRef.invalid && emailRef.touched">Please enter a valid email.</p>
+
+        <label for="gender">Gender</label>
+        <select
+          id="gender"
+          name="gender"
+          required
+          [(ngModel)]="gender"
+          #genderRef="ngModel"
+        >
+          <option value="" disabled selected>Select your gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+          <option value="prefer_not_to_say">Prefer not to say</option>
+        </select>
+        <p class="error-msg" *ngIf="genderRef.invalid && genderRef.touched">Please select your gender.</p>
+
+        <label for="profile-image">Profile Image</label>
+        <input
+          type="file"
+          id="profile-image"
+          name="profileImage"
+          accept="image/*"
+          (change)="onFileSelected($event)"
+        />
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Create a password"
+          required
+          minlength="6"
+          [(ngModel)]="password"
+          #passwordRef="ngModel"
+        />
+        <p class="error-msg" *ngIf="passwordRef.invalid && passwordRef.touched">
+          Password must be at least 6 characters.
+        </p>
+
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          placeholder="Confirm your password"
+          required
+          [(ngModel)]="confirmPassword"
+          #confirmPasswordRef="ngModel"
+        />
+        <p class="error-msg" *ngIf="confirmPassword !== password && confirmPasswordRef.touched">
+          Passwords do not match.
+        </p>
+
+        <p class="error-msg">{{registerError}}</p>
+        <p class="success-msg" *ngIf="successMessage">{{successMessage}}</p>
+
+        <button class="register" type="submit" [disabled]="form.invalid || isLoading || password !== confirmPassword">
+          <span *ngIf="!isLoading">Register</span>
+          <span *ngIf="isLoading">Registering...</span>
+        </button>
+
+        <a routerLink="/login" class="login_link">Already have an account? Login</a>
+      </div>
+    </form>
+
+  </ion-card>
+</ion-content>
