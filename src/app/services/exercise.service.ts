@@ -13,7 +13,7 @@ export class ExerciseService {
     for (const exercise of exercises) {
       result.push({
         ...exercise,
-        imageUrl: '/app/assets/img/' + exercise.imageName
+        imageUrl: '/assets/img/' + exercise.imageName
       });
     }
 

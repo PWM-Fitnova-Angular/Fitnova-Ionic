@@ -1,5 +1,5 @@
 <ion-card class="card">
-  <!-- Input oculto para seleccionar archivo -->
+
   <input
     type="file"
     #fileInput
@@ -9,16 +9,16 @@
   />
 
   <ion-card-content (click)="showDetails(cardObject)" class="card-link">
-    <!-- Etiqueta o categoría -->
+
     <ion-chip color="primary" class="card-label">
       {{ cardLabel }}
     </ion-chip>
 
     <!-- Imagen -->
     <div class="image-grid" [ngClass]="{ 'edit-mode': isEditMode }">
-      <img [src]="cardImage" alt="" class="card-image" />
+      <img [src]="cardImage" alt="{{cardImage}}" class="card-image" />
 
-      <!-- Overlay de edición -->
+
       <div class="image-overlay" *ngIf="isEditMode">
         <div class="overlay-content">
           <div class="camera-icon">
@@ -26,7 +26,7 @@
             <span>Click para subir imagen</span>
           </div>
 
-          <!-- Botones de acción -->
+
           <div class="overlay-actions" *ngIf="selectedFile">
             <ion-button
               color="success"
@@ -54,7 +54,7 @@
           </div>
         </div>
 
-        <!-- Indicador de carga -->
+
         <div class="loading-indicator" *ngIf="isUploading">
           <ion-spinner name="crescent"></ion-spinner>
           <span>Subiendo...</span>
@@ -62,7 +62,7 @@
       </div>
     </div>
 
-    <!-- Título e icono de detalle -->
+
     <ion-label class="card-title">{{ cardTitle }}</ion-label>
     <ion-icon name="information-circle" class="card-icon"></ion-icon>
   </ion-card-content>

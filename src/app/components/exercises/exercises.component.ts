@@ -64,7 +64,7 @@ export class ExercisesComponent  implements OnInit {
   private async loadExercises() {
     this.title = 'WORKOUTS';
     this.bodyClass = 'exercise-body';
-    this.mainItems = ['All','Arm exercises', 'Chest exercises', 'Back exercises', 'Leg exercises'];
+    this.mainItems = ['Favourites','All','Arm exercises', 'Chest exercises', 'Back exercises', 'Leg exercises'];
 
 
     this.sideItems = [

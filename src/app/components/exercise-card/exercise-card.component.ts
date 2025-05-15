@@ -1,7 +1,7 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {IonButton, IonCard, IonCardContent, IonChip, IonIcon, IonLabel, IonSpinner} from "@ionic/angular/standalone";
 import {Router} from "@angular/router";
-import {NgClass} from "@angular/common";
+import {NgClass, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-exercise-card',
@@ -15,7 +15,8 @@ import {NgClass} from "@angular/common";
     IonButton,
     IonSpinner,
     IonLabel,
-    NgClass
+    NgClass,
+    NgIf
   ]
 })
 export class ExerciseCardComponent {
