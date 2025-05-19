@@ -22,8 +22,7 @@ import {loginUser} from "../../firebase/firebase_auth_utils";
   styleUrls: ['./login.component.scss'],
   imports: [
     IonHeader, IonToolbar, IonTitle, IonContent,
-    IonList, IonItem, IonLabel, IonInput, IonButton,
-    FormsModule, RouterLink, IonCardHeader, IonCard, IonCardTitle, IonCardContent, NgIf,
+    FormsModule, RouterLink, IonCardHeader, IonCard, IonCardTitle, NgIf,
 
   ]
 })

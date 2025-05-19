@@ -78,20 +78,36 @@ export class RegisterComponent {
     try {
       const userCredential = await registerUser(this.email, this.password);
 
-
-      let photoURL = '';
-      if (this.selectedFile && userCredential.user) {
-        photoURL = await this.localStorageService.saveProfileImage(
-          userCredential.user.uid,
-          this.selectedFile
-        );
-      }
-
       if (userCredential.user) {
         await updateProfile(userCredential.user, {
-          displayName: this.name,
-          photoURL: photoURL || null
+          displayName: this.name
         });
+
+
+        let photoURL = '';
+        if (this.selectedFile && userCredential.user) {
+          try {
+            photoURL = await this.localStorageService.saveProfileImage(
+              userCredential.user.uid,
+              this.selectedFile
+            );
+
+
+            if (photoURL) {
+
+              if (photoURL.length <= 255) {
+                await updateProfile(userCredential.user, {
+                  photoURL: photoURL
+                });
+              } else {
+                console.warn("La URL de la foto es demasiado larga para Firebase Auth, pero se guardará en el perfil extendido");
+              }
+            }
+          } catch (imageError) {
+            console.error("Error al guardar la imagen:", imageError);
+          }
+        }
+
 
         await saveUserProfile(userCredential.user.uid, {
           name: this.name,
