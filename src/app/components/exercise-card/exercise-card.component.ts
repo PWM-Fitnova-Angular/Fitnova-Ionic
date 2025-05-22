@@ -1,12 +1,23 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {IonButton, IonCard, IonCardContent, IonChip, IonIcon, IonLabel, IonSpinner} from "@ionic/angular/standalone";
-import {Router} from "@angular/router";
-import {NgClass, NgIf} from "@angular/common";
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import {
+  IonCard,
+  IonCardContent,
+  IonChip,
+  IonIcon,
+  IonButton,
+  IonSpinner,
+  IonLabel,
+  ModalController
+} from '@ionic/angular/standalone';
+import { NgClass, NgIf, NgForOf } from '@angular/common';
+import { Router } from '@angular/router';
+import { DetailsWorkoutRecipeComponent } from '../details-workout-recipe/details-workout-recipe.component';
 
 @Component({
   selector: 'app-exercise-card',
   templateUrl: './exercise-card.component.html',
   styleUrls: ['./exercise-card.component.scss'],
+  standalone: true,
   imports: [
     IonCard,
     IonCardContent,
@@ -16,87 +27,77 @@ import {NgClass, NgIf} from "@angular/common";
     IonSpinner,
     IonLabel,
     NgClass,
-    NgIf
+    NgIf,
+    NgForOf
   ]
 })
 export class ExerciseCardComponent {
-
-  selectedFile: File | null = null;
-  imagePreview: string = '/app/assets/img/bench_press.jpg';
-  isUploading: boolean = false;
-  isEditMode: boolean = false;
-
-  @Input() cardLabel: string = 'Strength';
-  @Input() cardTitle: string = 'Test';
-  @Input() cardImage: string = 'Test';
-  @Input() cardObject: any;
-
-
+  @Input() cardLabel = 'Strength';
+  @Input() cardTitle  = 'Test';
+  @Input() cardImage  = '/assets/img/bench_press.jpg';
+  @Input() cardObject!: {
+    description: string;
+    requirements: string[];
+    imageUrl: string;
+  };
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+  selectedFile: File | null = null;
+  imagePreview = this.cardImage;
+  isUploading   = false;
+  isEditMode    = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private modalCtrl: ModalController
+  ) {}
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
-
-    if (input.files && input.files[0]) {
-      this.selectedFile = input.files[0];
-
-      if (!this.selectedFile.type.startsWith('image/')) {
-        alert('Por favor, selecciona un archivo de imagen válido.');
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imagePreview = reader.result as string;
-      };
-
-      reader.readAsDataURL(this.selectedFile);
+    if (!input.files?.[0]) return;
+    this.selectedFile = input.files[0];
+    if (!this.selectedFile.type.startsWith('image/')) {
+      alert('Por favor, selecciona un archivo de imagen válido.');
+      return;
     }
+    const reader = new FileReader();
+    reader.onload = () => this.imagePreview = reader.result as string;
+    reader.readAsDataURL(this.selectedFile);
   }
 
   uploadImage(event: Event): void {
-    event.preventDefault();
-    event.stopPropagation();
-
-    if (!this.selectedFile) {
-      console.error('No hay imagen seleccionada');
-      return;
-    }
-
+    event.preventDefault(); event.stopPropagation();
+    if (!this.selectedFile) return;
     this.isUploading = true;
-
-    // Simulación de carga
     setTimeout(() => {
       console.log('Imagen subida correctamente:', this.selectedFile?.name);
       this.isUploading = false;
       this.isEditMode = false;
     }, 1500);
-
   }
 
   cancelEdit(event: Event): void {
-    event.preventDefault();
-    event.stopPropagation();
-
+    event.preventDefault(); event.stopPropagation();
     this.resetImage();
     this.isEditMode = false;
   }
 
   resetImage(): void {
-    this.imagePreview = '/app/assets/img/DefaultImage.png';
+    this.imagePreview = this.cardImage;
     this.selectedFile = null;
-    if (this.fileInput) {
-      this.fileInput.nativeElement.value = '';
-    }
+    this.fileInput.nativeElement.value = '';
+  }
+
+  async openDetails(event: Event) {
+    event.stopPropagation();
+    const modal = await this.modalCtrl.create({
+      component: DetailsWorkoutRecipeComponent,
+      componentProps: { cardObject: this.cardObject }
+    });
+    await modal.present();
   }
 
   showDetails(cardObject: any) {
-    this.router.navigate(['/details'],{
-      state: {cardObject}
-    });
+    this.router.navigate(['/details'], { state: { cardObject } });
   }
-
 }

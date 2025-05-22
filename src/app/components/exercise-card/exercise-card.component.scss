@@ -67,7 +67,7 @@ ion-card.card.active .card-icon {
 }
 
 ion-card.card.active {
-  background: #8BBAED;
+  background: black;
   transform: scale(1.03);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
@@ -111,6 +111,29 @@ ion-card.card.active {
   margin-top: 10px;
   font-size: 14px;
   color: #fff;
+}
+
+/* Estilos del toggle */
+.toggle-header {
+  --background: transparent;
+  padding: 0 16px;
+}
+
+.toggle-header ion-icon {
+  transition: transform 0.3s;
+}
+
+.toggle-header ion-icon.rotated {
+  transform: rotate(180deg);
+}
+
+.details-container {
+  padding: 0 16px 16px;
+  background: #f0f0f0;
+}
+
+ion-button{
+  color: black;
 }
 
 /* Responsive */

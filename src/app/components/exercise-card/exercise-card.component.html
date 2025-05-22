@@ -61,9 +61,14 @@
         </div>
       </div>
     </div>
-
-
     <ion-label class="card-title">{{ cardTitle }}</ion-label>
     <ion-icon name="information-circle" class="card-icon"></ion-icon>
+    <ion-button
+      expand="full"
+      fill="clear"
+      (click)="openDetails($event)"
+    >
+      Details
+    </ion-button>
   </ion-card-content>
 </ion-card>
