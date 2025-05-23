@@ -40,6 +40,7 @@ export class LoginComponent  {
     const response = await loginUser(this.email, this.password);
 
     if(response){
+      localStorage.setItem('uid', response.user.uid);
       await this.router.navigate(['/exercises']);
     }else{
       this.loginError = "Email or password incorrect";

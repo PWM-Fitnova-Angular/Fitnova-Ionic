@@ -1,6 +1,13 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>{{ title }}</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button routerLink="/profile" class="profile-button" fill="outline">
+        <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+        <span>Profile</span>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

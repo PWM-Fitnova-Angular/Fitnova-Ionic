@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  IonButton,
+  IonButtons,
   IonCol,
   IonContent, IonGrid,
   IonHeader, IonIcon, IonItem, IonLabel, IonList,
@@ -11,7 +13,7 @@ import {
 } from "@ionic/angular/standalone";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {ExerciseCardComponent} from "../exercise-card/exercise-card.component";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {ExerciseService} from "../../services/exercise.service";
 
 @Component({
@@ -32,7 +34,11 @@ import {ExerciseService} from "../../services/exercise.service";
     NgForOf,
     ExerciseCardComponent,
     NgIf,
-    NgClass
+    NgClass,
+    IonButtons,
+    IonButton,
+    RouterLink,
+    IonIcon
   ]
 })
 export class ExercisesComponent  implements OnInit {

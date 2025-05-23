@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>User Profile</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button routerLink="/exercises" class="profile-button">
+        Exercises
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="profile-content">
+
+  <div class="profile-card">
+    <!-- Imagen de perfil circular -->
+    <div class="profile-image">
+      <img [src]="userImageUrl" alt="Profile Image" />
+    </div>
+
+    <!-- Nombre y detalles -->
+    <h2 class="username">{{ username }}</h2>
+
+    <div class="user-details">
+      <p><strong>Correo:</strong> {{ email }}</p>
+      <p><strong>Gender:</strong> {{ gender }} </p>
+    </div>
+  </div>
+
+</ion-content>
