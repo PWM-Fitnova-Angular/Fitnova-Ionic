@@ -40,6 +40,7 @@ export class LoginComponent  {
     const response = await loginUser(this.email, this.password);
 
     if(response){
+      console.log(response.user.uid);
       localStorage.setItem('uid', response.user.uid);
       await this.router.navigate(['/exercises']);
     }else{

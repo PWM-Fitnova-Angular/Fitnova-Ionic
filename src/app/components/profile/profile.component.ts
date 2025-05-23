@@ -4,7 +4,7 @@ import {UserService} from "../../services/user.service";
 import {LocalStorageService} from "../../services/local-storage.service";
 import {RouterLink} from "@angular/router";
 
-const userUid : string | null = sessionStorage.getItem('uid');
+const userUid : string | null = localStorage.getItem('uid');
 
 
 @Component({
@@ -36,8 +36,12 @@ export class ProfileComponent  implements OnInit {
     this.email = data.email;
     this.username= data.nameSurname;
     this.gender = data.gender;
-    if(userUid){this.userImageUrl = this.localStorageService.getProfileImage(userUid);
-    console.log("carga")}
+    console.log(userUid)
+    if(userUid){
+
+      this.userImageUrl = this.localStorageService.getProfileImage(userUid);
+      console.log(this.userImageUrl);
+      console.log("carga")}
 
 
 
