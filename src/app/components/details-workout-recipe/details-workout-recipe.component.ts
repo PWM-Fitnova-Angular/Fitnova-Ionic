@@ -47,4 +47,8 @@ export class DetailsWorkoutRecipeComponent {
   dismiss() {
     this.modalCtrl.dismiss();
   }
+
+  saveFavourites() {
+    console.log("saved")
+  }
 }

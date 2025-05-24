@@ -37,13 +37,7 @@ export class ProfileComponent  implements OnInit {
     this.username= data.nameSurname;
     this.gender = data.gender;
     console.log(userUid)
-    if(userUid){
-
-      this.userImageUrl = this.localStorageService.getProfileImage(userUid);
-      console.log(this.userImageUrl);
-      console.log("carga")}
-
-
+    if(userUid){this.userImageUrl = this.localStorageService.getProfileImage(userUid);}
 
   }
 

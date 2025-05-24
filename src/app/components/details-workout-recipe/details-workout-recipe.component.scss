@@ -4,3 +4,22 @@
   border-radius: 10px;
   margin-bottom: 16px;
 }
+.save-button-container {
+  margin-top: 30px;
+  padding-bottom: 20px;
+}
+
+.save-button {
+  --background: #FFD700; // amarillo
+  --color: black;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: none;
+}
+
+.save-button:hover {
+  --background: #ffcc00;
+}
+
