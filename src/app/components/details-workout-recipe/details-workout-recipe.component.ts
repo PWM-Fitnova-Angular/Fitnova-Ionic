@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -14,6 +14,8 @@ import {
   ModalController
 } from '@ionic/angular/standalone';
 import { NgForOf } from '@angular/common';
+import {SqliteService} from "../../services/sqlite.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-details-workout-recipe',
@@ -35,20 +37,42 @@ import { NgForOf } from '@angular/common';
     NgForOf
   ]
 })
-export class DetailsWorkoutRecipeComponent {
+export class DetailsWorkoutRecipeComponent implements OnInit {
   @Input() cardObject!: {
     description: string;
     requirements: string[];
     imageUrl: string;
+    name:string;
+    id:string;
   };
+  isSaved: boolean = false;
 
-  constructor(private modalCtrl: ModalController) {}
+  constructor(private modalCtrl: ModalController, private dbService: SqliteService, private router: Router) {
+    const nav = this.router.getCurrentNavigation();
+    this.cardObject = nav?.extras?.state?.['cardObject'];
+  }
+  async ngOnInit() {
+
+      this.isSaved = await this.dbService.isFavourite(this.cardObject.id);
+
+  }
 
   dismiss() {
     this.modalCtrl.dismiss();
   }
 
-  saveFavourites() {
-    console.log("saved")
+  async saveFavourites() {
+    console.log(this.isSaved);
+    if (this.isSaved) {
+      await this.dbService.deleteFavourite(this.cardObject.id);
+      console.log("borrado")
+      this.isSaved = false;
+      await this.router.navigate(['/exercises']);
+    } else {
+      await this.dbService.saveFavourite(this.cardObject);
+      this.isSaved = true;
+    }
   }
+
+
 }

@@ -98,6 +98,6 @@ export class ExerciseCardComponent {
   }
 
   showDetails(cardObject: any) {
-    this.router.navigate(['/details'], { state: { cardObject } });
+    this.router.navigate(['/details'], { state: { cardObject: this.cardObject } });
   }
 }

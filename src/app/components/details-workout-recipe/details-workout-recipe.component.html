@@ -27,7 +27,8 @@
 
   <div class="save-button-container">
     <ion-button expand="block" class="save-button" (click)="saveFavourites()">
-      Save
+      {{ isSaved ? 'Unsave' : 'Save' }}
     </ion-button>
   </div>
+
 </ion-content>

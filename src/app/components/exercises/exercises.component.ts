@@ -15,6 +15,7 @@ import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {ExerciseCardComponent} from "../exercise-card/exercise-card.component";
 import {Router, RouterLink} from "@angular/router";
 import {ExerciseService} from "../../services/exercise.service";
+import {SqliteService} from "../../services/sqlite.service";
 
 @Component({
   selector: 'app-exercises',
@@ -56,7 +57,7 @@ export class ExercisesComponent  implements OnInit {
   topFilterActive: string | null = null;
   sideFilterActive: string | null = null;
 
-  constructor(private router: Router, private exerciseService: ExerciseService) {}
+  constructor(private router: Router, private exerciseService: ExerciseService, private sqliteService: SqliteService) {}
 
   ngOnInit() {
 
@@ -87,16 +88,23 @@ export class ExercisesComponent  implements OnInit {
 
 
 
-  topFilter(item: string) {
+  async topFilter(item: string) {
     const parte = item.split(' ')[0];
-    if(parte === 'All'){
+
+    if (parte === 'All') {
       this.topFilterActive = null;
-    }else{
+      this.cardItems = [...this.allItems];
+    } else if (parte === 'Favourites') {
+      this.topFilterActive = 'Favourites';
+      this.cardItems = await this.sqliteService.getFavourites();
+    } else {
       this.topFilterActive = (this.topFilterActive === parte) ? null : parte;
+      this.applyFilters();
     }
-    this.applyFilters();
+
     this.updateBodyClass();
   }
+
 
   sideFilter(item: string) {
     const parte = item.split(' ')[0];
