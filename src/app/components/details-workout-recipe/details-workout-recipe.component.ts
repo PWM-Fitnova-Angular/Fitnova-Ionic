@@ -14,6 +14,8 @@ import {
   ModalController
 } from '@ionic/angular/standalone';
 import { NgForOf } from '@angular/common';
+import { addIcons } from 'ionicons';
+import { close, warningOutline } from 'ionicons/icons';
 import {SqliteService} from "../../services/sqlite.service";
 import {Router} from "@angular/router";
 
@@ -48,13 +50,14 @@ export class DetailsWorkoutRecipeComponent implements OnInit {
   isSaved: boolean = false;
 
   constructor(private modalCtrl: ModalController, private dbService: SqliteService, private router: Router) {
+    addIcons({ close, warningOutline });
+
     const nav = this.router.getCurrentNavigation();
     this.cardObject = nav?.extras?.state?.['cardObject'];
   }
+
   async ngOnInit() {
-
-      this.isSaved = await this.dbService.isFavourite(this.cardObject.id);
-
+    this.isSaved = await this.dbService.isFavourite(this.cardObject.id);
   }
 
   dismiss() {
@@ -73,6 +76,4 @@ export class DetailsWorkoutRecipeComponent implements OnInit {
       this.isSaved = true;
     }
   }
-
-
 }
