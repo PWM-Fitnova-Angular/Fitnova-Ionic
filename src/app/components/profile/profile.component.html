@@ -13,10 +13,26 @@
 <ion-content class="profile-content">
 
   <div class="profile-card">
-    <!-- Imagen de perfil circular -->
-    <div class="profile-image">
-      <img [src]="userImageUrl" alt="Profile Image" />
+    <!-- Imagen de perfil circular con botón de editar -->
+    <div class="profile-image-container">
+      <div class="profile-image">
+        <img [src]="userImageUrl" alt="Profile Image" />
+      </div>
+      <ion-button
+        fill="clear"
+        class="edit-photo-button"
+        (click)="openImagePicker()">
+        <ion-icon name="camera" slot="icon-only"></ion-icon>
+      </ion-button>
     </div>
+
+    <!-- Input oculto para seleccionar archivos -->
+    <input
+      type="file"
+      #fileInput
+      accept="image/*"
+      (change)="onFileSelected($event)"
+      style="display: none;">
 
     <!-- Nombre y detalles -->
     <h2 class="username">{{ username }}</h2>
